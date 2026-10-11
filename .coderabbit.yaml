@@ -3,9 +3,36 @@ version: 2
 language: "zh-TW"
 
 reviews:
+  profile: "chill"              # 保持 chill 模式，避免過多零碎的命名或格式雜訊
   high_level_summary: true
   walkthrough: true
-  profile: "chill"
+
+  # 排除前端打包產物、Python 快取與相依性檔案
+  path_filters:
+    - "!build/**"
+    - "!dist/**"
+    - "!**/__pycache__/**"
+    - "!**/*.pyc"
+    - "!requirements*.txt"
+    - "!poetry.lock"
+    - "!Pipfile.lock"
+    - "!assets/**"              # 若有靜態圖檔或 icon，直接略過審查
+
+  # 全域審查重點
+  prompt: |
+    這是一個以 Python (Flet) 開發的 Web / PWA 工具專案。
+    請全程使用台灣繁體中文審查。
+    重點檢查：
+    1. 程式碼邏輯與數值/日期計算的邊界條件。
+    2. 例外處理（Exception handling）與使用者輸入驗證。
+    3. 潛在的效能瓶頸或不必要的狀態重複更新。
+
+  # 專門針對 Python 檔案的指示
+  path_instructions:
+    - path: "**/*.py"
+      instructions: |
+        - 檢查 Flet UI 元件事件處理與 page.update() 的呼叫時機是否合理。
+        - 檢查是否有妥善處理資料存取、型別轉換失敗時的例外。
 
 chat:
   auto_reply: true
