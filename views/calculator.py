@@ -311,7 +311,7 @@ class GradeCalculator(ft.Column):
                 ),
                 self.shortcuts_panel,
                 ft.Text(
-                    "© 2026 朱家儀. All rights reserved.",
+                    "© 2026 CodeSmith. All rights reserved.",
                     size=12,
                     color=ft.Colors.GREY_600,
                 ),
